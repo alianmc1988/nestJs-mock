@@ -10,8 +10,9 @@ import {
 import { PersonaService } from './persona.service';
 import { CreatePersonaDto } from './dto/create-persona.dto';
 import { UpdatePersonaDto } from './dto/update-persona.dto';
+import { BaseUrl } from 'src/config';
 
-@Controller('persona')
+@Controller(`${BaseUrl}/persona`)
 export class PersonaController {
   constructor(private readonly personaService: PersonaService) {}
 
