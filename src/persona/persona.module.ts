@@ -4,6 +4,6 @@ import { PersonaController } from './persona.controller';
 
 @Module({
   controllers: [PersonaController],
-  providers: [PersonaService]
+  providers: [PersonaService],
 })
 export class PersonaModule {}
