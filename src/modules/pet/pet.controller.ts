@@ -17,7 +17,6 @@ import {
   ApiCreatedResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { Pet } from './entities/pet.entity';
 
 @ApiTags('pet')
 @Controller('pet')
