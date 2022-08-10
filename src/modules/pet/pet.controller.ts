@@ -17,7 +17,7 @@ export class PetController {
   constructor(private readonly petService: PetService) {}
 
   @Post()
-  create(@Body() petToRegister: CreatePetDto): Promise<IPet | string> {
+  create(@Body() petToRegister: CreatePetDto): Promise<IPet> {
     return this.petService.create(petToRegister);
   }
 
@@ -27,7 +27,7 @@ export class PetController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<IPet | string> {
+  findOne(@Param('id') id: string): Promise<IPet> {
     return this.petService.findOne(id);
   }
 
@@ -35,7 +35,7 @@ export class PetController {
   update(
     @Param('id') id: string,
     @Body() updatePetDto: UpdatePetDto,
-  ): Promise<IPet | string> {
+  ): Promise<IPet> {
     return this.petService.update(id, updatePetDto);
   }
 

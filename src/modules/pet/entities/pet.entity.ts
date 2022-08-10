@@ -13,3 +13,25 @@ export const PetSchema = new mongoose.Schema(
     versionKey: false,
   },
 );
+
+export class Pet {
+  readonly name: string;
+  readonly breed: string;
+  readonly age: number;
+  readonly type: string;
+  readonly owner: string;
+
+  constructor(
+    name: string,
+    breed: string,
+    age: number,
+    type: string,
+    owner: string,
+  ) {
+    this.name = name;
+    this.breed = breed;
+    this.age = age;
+    this.type = type;
+    this.owner = owner;
+  }
+}

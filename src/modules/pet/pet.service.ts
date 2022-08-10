@@ -9,45 +9,45 @@ import { IPet } from './Pet.interface';
 export class PetService {
   constructor(@InjectModel('Pet') private readonly Pet: Model<IPet>) {}
 
-  async create(newPet: CreatePetDto): Promise<IPet | string> {
+  async create(newPet: CreatePetDto): Promise<IPet> {
     const registeredPet = new this.Pet(newPet);
     let response = null;
     try {
       response = await registeredPet.save();
     } catch (error) {
-      return 'Error en la BD';
+      throw new Error('Error en la BD');
     }
     return response;
   }
 
-  async findAll(): Promise<IPet[] | string> {
+  async findAll(): Promise<IPet[]> {
     let listPet = [];
     try {
       listPet = await this.Pet.find();
     } catch (error) {
-      return 'Error en la BD';
+      throw new Error('Error en la BD');
     }
     return listPet;
   }
 
-  async findOne(id: string): Promise<IPet | string> {
+  async findOne(id: string): Promise<IPet> {
     let petFounded = null;
     try {
       petFounded = await this.Pet.find({ _id: id });
     } catch (error) {
-      return 'Error en la BD';
+      throw new Error('Error en la BD');
     }
     return petFounded ? petFounded : `Pet not found`;
   }
 
-  async update(id: string, petToUpdate: UpdatePetDto): Promise<IPet | string> {
+  async update(id: string, petToUpdate: UpdatePetDto): Promise<IPet> {
     let pet = null;
     try {
       pet = await this.Pet.findByIdAndUpdate(id, petToUpdate, {
         new: true,
       });
     } catch (error) {
-      return 'Error en la BD';
+      throw new Error('Error en la BD');
     }
     return pet ? pet : `Pet not found`;
   }
@@ -57,7 +57,7 @@ export class PetService {
     try {
       pet = await this.Pet.findByIdAndRemove(id);
     } catch (error: any) {
-      return 'Error en la BD';
+      throw new Error('Error en la BD');
     }
     return pet ? `Pet ${pet.name} was successfully removed` : `Pet not found`;
   }
