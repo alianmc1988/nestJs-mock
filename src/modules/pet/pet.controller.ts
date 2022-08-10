@@ -13,12 +13,13 @@ import { UpdatePetDto } from './dto/update-pet.dto';
 import { IPet } from './Pet.interface';
 import {
   ApiOkResponse,
-  ApiResponse,
-  ApiUnauthorizedResponse,
-  ApiHeader,
   ApiParam,
+  ApiCreatedResponse,
+  ApiTags,
 } from '@nestjs/swagger';
+import { Pet } from './entities/pet.entity';
 
+@ApiTags('pet')
 @Controller('pet')
 export class PetController {
   constructor(private readonly petService: PetService) {}
@@ -26,20 +27,33 @@ export class PetController {
   @Post()
   @ApiParam({
     name: 'Authorization',
-    description: 'Content-Type: application/json',
+    description: 'Bearer Token',
+    required: false,
   })
-  @ApiOkResponse({
-    status: 201,
-    description: 'The record has been successfully created',
+  @ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+            },
+          },
+        },
+      },
+    },
   })
   create(@Body() petToRegister: CreatePetDto): Promise<IPet> {
     return this.petService.create(petToRegister);
   }
 
-  @Get('/listAll')
+  @Get('')
   @ApiParam({
     name: 'Authorization',
-    description: 'Content-Type: application/json',
+    description: 'Bearer token',
+    required: false,
   })
   @ApiOkResponse({
     status: 200,

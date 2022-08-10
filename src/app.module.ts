@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AppLoggerMiddleware } from './custom-logger';
 import { PetModule } from './modules/pet/pet.module';
 
 @Module({
@@ -13,7 +14,7 @@ import { PetModule } from './modules/pet/pet.module';
   providers: [AppService],
 })
 export class AppModule {
-  constructor() {
-    console.log('AppModule constructor');
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
   }
 }
