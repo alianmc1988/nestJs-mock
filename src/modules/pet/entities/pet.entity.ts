@@ -15,11 +15,11 @@ export const PetSchema = new mongoose.Schema(
 );
 
 export class Pet {
-  readonly name: string;
-  readonly breed: string;
-  readonly age: number;
-  readonly type: string;
-  readonly owner: string;
+  private readonly name: string;
+  private readonly breed: string;
+  private readonly age: number;
+  private readonly type: string;
+  private readonly owner: string;
 
   constructor(
     name: string,
@@ -35,3 +35,23 @@ export class Pet {
     this.owner = owner;
   }
 }
+
+// @Schema()
+// export class Pet extends Document {
+//   @Prop({ required: true })
+//   name: string;
+
+//   @Prop({ default: 0 })
+//   age: number;
+
+//   @Prop({ required: false })
+//   breed: string;
+
+//   @Prop({ required: false })
+//   color: string;
+
+//   @Prop({ required: true })
+//   type: string;
+// }
+
+// export const PetSchema = SchemaFactory.createForClass(Pet);
