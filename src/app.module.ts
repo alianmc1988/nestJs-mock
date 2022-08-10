@@ -1,17 +1,19 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-// import { MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import IndexModules from './modules';
+import { PetModule } from './modules/pet/pet.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    // MongooseModule.forRoot('mongodb://localhost/nest'),
-    IndexModules.PersonaModule,
+    MongooseModule.forRoot('mongodb://localhost/nestDBExample'),
+    PetModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    console.log('AppModule constructor');
+  }
+}
